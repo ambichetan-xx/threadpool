@@ -33,10 +33,19 @@ public class TaskRunner {
 	@SuppressWarnings("unchecked")
 	public <V> Future<V> runTaskAsync(ITask<V> task, int times, long sleepMillis) {
 
+		/*
+		 * I have copied the values to local final variables, since call()
+		 * method takes only final parameters. I didn't want to change the
+		 * function signature
+		 */
 		final ITask<V> executiontask = task;
 		final int executionTimes = times;
 		final long sleepMiliTime = sleepMillis;
 
+		/*
+		 * creates the thread and calls call() method of the ITask object to
+		 * perform the required operation
+		 */
 		return (Future<V>) executor.submit(new Callable<V>() {
 			@Override
 			public V call() throws Exception {
@@ -45,6 +54,7 @@ public class TaskRunner {
 					if (executiontask.isComplete()) {
 						break;
 					} else {
+						// printing the called method information
 						System.out.println("calling "
 								+ executiontask.getClass().getSimpleName()
 								+ "."

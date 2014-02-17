@@ -12,7 +12,10 @@ import task.ITask;
  */
 public class FileCheckerTask<T> implements ITask<T> {
 
+	// holds the filename
 	private String fileName;
+
+	// holds the status of the task
 	private boolean complete;
 
 	public FileCheckerTask(String fileName) {
@@ -27,7 +30,6 @@ public class FileCheckerTask<T> implements ITask<T> {
 	@Override
 	@SuppressWarnings("unchecked")
 	public T call() {
-		// perform the "File(fileName).isFile()" task again
 		File f = new File(fileName);
 		complete = f.exists();
 		return (T) Boolean.valueOf(complete);

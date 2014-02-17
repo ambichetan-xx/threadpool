@@ -29,6 +29,10 @@ public class TaskSubmitter {
 		ITask<Boolean> fileCheckerTask = new FileCheckerTask<Boolean>(
 				"e:/test.txt");
 		TaskRunner taskRunner = new TaskRunner();
+		/*
+		 * this creates a thread which checks for availability of "e:/test.txt"
+		 * 10 times with interval of 5 secs
+		 */
 		Future<Boolean> result = taskRunner.<Boolean> runTaskAsync(
 				fileCheckerTask, 10, 5000);
 
@@ -40,7 +44,7 @@ public class TaskSubmitter {
 		taskRunner.runTaskAsync(portCheckerTask, 10, 5000);
 		System.out.println(result.get());
 
-		// exit all threads
+		/* exit all threads */
 		taskRunner.getExecutor().shutdown();
 		while (!taskRunner.getExecutor().isTerminated()) {
 		}
