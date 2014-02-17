@@ -46,8 +46,10 @@ public class TaskRunner {
 						break;
 					} else {
 						System.out.println("calling "
+								+ executiontask.getClass().getSimpleName()
+								+ "."
 								+ executiontask.getClass().getMethod("call")
-								+ " " + i + " time");
+										.getName() + "() " + i + " time");
 						result = (Boolean) executiontask.call();
 					}
 					if (!executiontask.isComplete()) {
